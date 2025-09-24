@@ -17,19 +17,29 @@ pipeline {
 
         stage('Terraform Init') {
             steps {
-                sh 'terraform init -upgrade'
+                bat 'terraform init -upgrade'
             }
         }
 
         stage('Terraform Plan') {
             steps {
-                sh 'terraform plan -var "subscription_id=$AZ_SUBSCRIPTION_ID" -var "location=West US" -var "resource_group_name=kml_rg_main-22e8cb42c6144bfc"'
+                bat '''
+                terraform plan ^
+                  -var "subscription_id=%AZ_SUBSCRIPTION_ID%" ^
+                  -var "location=West US" ^
+                  -var "resource_group_name=kml_rg_main-9630e047037145ea"
+                '''
             }
         }
 
         stage('Terraform Apply') {
             steps {
-                sh 'terraform apply -auto-approve -var "subscription_id=$AZ_SUBSCRIPTION_ID" -var "location=West US" -var "resource_group_name=kml_rg_main-22e8cb42c6144bfc"'
+                bat '''
+                terraform apply -auto-approve ^
+                  -var "subscription_id=%AZ_SUBSCRIPTION_ID%" ^
+                  -var "location=West US" ^
+                  -var "resource_group_name=kml_rg_main-9630e047037145ea"
+                '''
             }
         }
     }
