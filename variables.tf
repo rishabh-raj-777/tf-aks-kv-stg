@@ -1,15 +1,24 @@
-    variable "subscription_id" {
-      description = "Azure subscription id"
-      type = string
-    }
+variable "subscription_id" {
+  type = string
+}
 
-    variable "resource_group_name" {
-      description = "Name of the resource group"
-      type = string
-    }
+variable "client_id" {
+  type = string
+}
 
-    variable "location" {
-      description = "Azure region"
-      type = string
-      default = "West US"
-    }
+variable "client_secret" {
+  type = string
+  sensitive = true
+}
+
+variable "tenant_id" {
+  type = string
+}
+
+variable "location" {
+  type = string
+}
+
+variable "resource_group_name" {
+  type = string
+}
