@@ -23,23 +23,29 @@ pipeline {
 
         stage('Terraform Plan') {
             steps {
-                bat '''
+                bat """
                 terraform plan ^
                   -var "subscription_id=%AZ_SUBSCRIPTION_ID%" ^
+                  -var "client_id=%AZ_CLIENT_ID%" ^
+                  -var "client_secret=%AZ_CLIENT_SECRET%" ^
+                  -var "tenant_id=%AZ_TENANT_ID%" ^
                   -var "location=West US" ^
                   -var "resource_group_name=kml_rg_main-9630e047037145ea"
-                '''
+                """
             }
         }
 
         stage('Terraform Apply') {
             steps {
-                bat '''
+                bat """
                 terraform apply -auto-approve ^
                   -var "subscription_id=%AZ_SUBSCRIPTION_ID%" ^
+                  -var "client_id=%AZ_CLIENT_ID%" ^
+                  -var "client_secret=%AZ_CLIENT_SECRET%" ^
+                  -var "tenant_id=%AZ_TENANT_ID%" ^
                   -var "location=West US" ^
                   -var "resource_group_name=kml_rg_main-9630e047037145ea"
-                '''
+                """
             }
         }
     }
